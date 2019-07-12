@@ -8,6 +8,9 @@ router.get("/", (req, res) => {
   data
     .get()
     .then(action => {
+      if (action.length === 0) {
+        return res.status(404).json("Could not find the action with given id");
+      }
       return res.status(200).json(action);
     })
     .catch(error => {
@@ -19,6 +22,9 @@ router.get("/:id", validateID, (req, res) => {
   data
     .get(req.params.id)
     .then(action => {
+      if (action.length === 0) {
+        return res.status(404).json("Could not find the action with given id");
+      }
       return res.status(200).json(action);
     })
     .catch(error => {
